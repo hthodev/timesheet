@@ -1,0 +1,42 @@
+import { Document } from "mongoose";
+import { IProject } from "./IProject";
+
+export interface IUser extends Document {
+  id: number;
+  userName: string;
+  password: string;
+  name: string;
+  surname: string;
+  emailAddress: string;
+  phoneNumber: string;
+  address: string;
+  isActive: boolean;
+  roleNames: string[];
+  type: number;
+  salary: number;
+  salaryAt: Date;
+  startDateAt: Date;
+  allowedLeaveDay: number;
+  userCode: string;
+  jobTitle: string;
+  level: number;
+  registerWorkDay: string;
+  managerId: number;
+  branchId: number;
+  sex: number;
+  avatarPath: string;
+  morningWorking: number;
+  morningStartAt: string;
+  morningEndAt: string;
+  afternoonWorking: number;
+  afternoonStartAt: string;
+  afternoonEndAt: string;
+  isWorkingTimeDefault: boolean;
+  isStopWork: boolean;
+  projectI?: number;
+  fullName: string;
+  projectUsers: IProject[];
+  branchDisplayName: string;
+  managerName: string;
+  creationTime: Date;
+}
