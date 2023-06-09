@@ -3,11 +3,11 @@ import dotenv from "dotenv";
 import { DBConnection } from "./configs/dbConn";
 import { errorConverter, errorHandler } from "./middleware/error";
 import UserController from "./controllers/User";
-import passport from "passport";
+// import passport from "passport";
 const cookieSession = require("cookie-session");
 import cors = require("cors");
 
-require("./passport");
+// require("./passport");
 require("dotenv").config();
 
 /**cle
@@ -41,8 +41,8 @@ export class Application {
       })
     );
 
-    this.server.app.use(passport.initialize());
-    this.server.app.use(passport.session());
+    // this.server.app.use(passport.initialize());
+    // this.server.app.use(passport.session());
     this.server.app.use("/api", this.server.router);
     this.server.app.get("/avatars/:name", UserController.imageUser);
     ((port = process.env.APP_PORT || 5000) => {

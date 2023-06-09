@@ -27,11 +27,13 @@ class MasterRouter extends BaseRouter {
   private configure() {
     // define onfigurations
     this.router.use(
-      cors({
-        origin: process.env.CLIENT_URL,
-        methods: "GET,POST,PUT,DELETE",
-        credentials: true,
-      })
+      cors(
+      //   {
+      //   origin: process.env.CLIENT_URL,
+      //   methods: "GET,POST,PUT,DELETE",
+      //   credentials: true,
+      // }
+      )
     );
 
     this.router.use(bodyParser.json()); // to support JSON-encoded bodies
