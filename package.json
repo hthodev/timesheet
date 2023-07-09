@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require ts-node/register src/tests/**/*.ts",
-    "start": "tsc && node dist/index.js",
+    "change": "tsc && node dist/index.js",
+    "start": "nodemon src/index.ts",
     "dev": "nodemon src/index.ts"
   },
   "keywords": [],
