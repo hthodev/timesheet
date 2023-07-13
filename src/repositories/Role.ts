@@ -1,5 +1,6 @@
 import { IRole } from "../interfaces/DTO/IRole";
-import { IRoleTotal } from "../interfaces/vendors/IResponse";
+import { IRoleTotal, rolePermission } from "../interfaces/vendors/IResponse";
+import { PermissionModel } from "../model/permission";
 import { RoleModel } from "../model/roles";
 require("dotenv").config();
 
@@ -34,8 +35,14 @@ class RoleRepository {
     return { items: roles, totalCount: totalItems };
   }
 
-  async roleById(Id: number): Promise<IRole> {
-    return await RoleModel.findOne({ id_role: Id }).select("-_id -__v");
+  async roleById(Id: number): Promise<rolePermission> {
+    const role = await RoleModel.findOne({ id_role: Id }).select("-_id -__v");
+    const permissions = await PermissionModel.findOne({ roleId: Id })
+
+    return {
+      role,
+      permissions
+    }
   }
   async roleUpdate(updateData): Promise<void> {
     await RoleModel.findOneAndUpdate(

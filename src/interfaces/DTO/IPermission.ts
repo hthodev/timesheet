@@ -7,5 +7,6 @@ export interface IPermission extends Document {
   displayName?: { type: string };
   isConfiguration?: { type: boolean };
   multiTenancySides?: { type: number };
+  roleId?: { type: number }
   creationTime?: { type: Date };
 }
