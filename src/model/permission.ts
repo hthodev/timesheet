@@ -28,6 +28,9 @@ const permissionSchema = new Schema<IPermission>({
     type: Date,
     default: Date.now(),
   },
+  roleId: {
+    type: Number
+  }
 });
 
 permissionSchema.plugin(AutoIncrement, { inc_field: "id_permission" });

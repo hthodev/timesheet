@@ -7,6 +7,7 @@ import { IUser } from "../DTO/Iuser";
 import { ITask } from "../DTO/ITask";
 import { IWorkingTime } from "../DTO/IWorkingTime";
 import { IRole } from "../DTO/IRole";
+import { IPermission } from "../DTO/IPermission";
 
 export interface ProjectTargetUser {
   userId: number;
@@ -76,4 +77,9 @@ export interface ITimeSheetProjectResponse {
 export interface statusResponseTimeSheet {
   success: number;
   fail: number;
+}
+
+export interface rolePermission{
+  role: IRole,
+  permissions: IPermission
 }
