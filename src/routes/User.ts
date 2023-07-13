@@ -1,5 +1,5 @@
 import { BaseRouter } from "./BaseRouter";
-import { checkAdmin, checkLogin } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import {
   getAllUserPaggingValidate,
   createUserValidate,
@@ -10,7 +10,7 @@ import {
 import userController from "../controllers/User";
 import { upload } from "../middleware/multer";
 import { queryIdValidate, bodyIdValidate } from "../validations/idValidation";
-
+import { ROLE } from "../utils/constant"
 class UserRoute extends BaseRouter {
   constructor() {
     super();
@@ -21,25 +21,25 @@ class UserRoute extends BaseRouter {
     this.router.post(
       "/Create",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       createUserValidate,
       userController.creatUser
     );
 
-    this.router.get("/GetAll", checkLogin, checkAdmin, userController.allUser);
+    this.router.get("/GetAll", checkLogin, checkRole(ROLE.ADMIN), userController.allUser);
 
     this.router.post(
       "/GetAllPagging",
       getAllUserPaggingValidate,
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       userController.allUserPagging
     );
 
     this.router.put(
       "/Update",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       updateUserValidate,
       userController.updateUser
     );
@@ -47,14 +47,14 @@ class UserRoute extends BaseRouter {
     this.router.get(
       "/GetUserNotPagging",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       userController.allUserNotPagging
     );
 
     this.router.get(
       "/GetAllManager",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       userController.allManager
     );
 
@@ -62,28 +62,28 @@ class UserRoute extends BaseRouter {
       "/Get",
       queryIdValidate,
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       userController.getByIdUser
     );
 
     this.router.post(
       "/ChangeUserRole",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       userController.changeRoleUser
     );
 
     this.router.put(
       "/UpdateRole",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       userController.updateRoleUser
     );
 
     this.router.get(
       "/GetRoles",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       userController.getRoleUser
     );
 
@@ -91,28 +91,28 @@ class UserRoute extends BaseRouter {
       "/Delete",
       queryIdValidate,
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       userController.deleteUser
     );
 
     this.router.post(
       "/ResetPassword",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       changePasswordValidate,
       userController.changePasswordUser
     );
     this.router.post(
       "/DeactiveUser",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       bodyIdValidate,
       userController.deactiveUser
     );
     this.router.post(
       "/ActiveUser",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       bodyIdValidate,
       userController.activeUser
     );

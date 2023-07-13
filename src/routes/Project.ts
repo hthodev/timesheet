@@ -1,11 +1,12 @@
 import { BaseRouter } from "./BaseRouter";
-import { checkAdmin, checkLogin, checkRole } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import projectController from "../controllers/Project";
 import {
   inputValidate,
   projectValidate,
 } from "../validations/projectValidation";
 import { queryIdValidate, bodyIdValidate } from "../validations/idValidation";
+import { ROLE } from "../utils/constant";
 
 class ProjectRoute extends BaseRouter {
   constructor() {
@@ -17,41 +18,41 @@ class ProjectRoute extends BaseRouter {
     this.router.post(
       "/Save",
       checkLogin,
-      checkRole("MANAGER", "ADMIN"),
+      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       projectValidate,
       projectController.createAndUpdateProject
     );
     this.router.get(
       "/getAll",
       checkLogin,
-      checkRole("MANAGER", "ADMIN"),
+      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       projectController.getAllProject
     );
     this.router.get(
       "/Get",
       checkLogin,
-      checkRole("MANAGER", "ADMIN"),
+      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       inputValidate,
       projectController.projectById
     );
     this.router.delete(
       "/Delete",
       checkLogin,
-      checkRole("MANAGER", "ADMIN"),
+      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       queryIdValidate,
       projectController.deleteProject
     );
     this.router.post(
       "/Inactive",
       checkLogin,
-      checkRole("MANAGER", "ADMIN"),
+      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       bodyIdValidate,
       projectController.inActiveProject
     );
     this.router.post(
       "/Active",
       checkLogin,
-      checkRole("MANAGER", "ADMIN"),
+      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       bodyIdValidate,
       projectController.activeProject
     );

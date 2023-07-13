@@ -1,9 +1,9 @@
 import { BaseRouter } from "./BaseRouter";
 import taskController from "../controllers/Task";
-import { checkAdmin, checkLogin } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import { taskValidate } from "../validations/taskValidation";
 import { bodyIdValidate, queryIdValidate } from "../validations/idValidation";
-
+import { ROLE } from "../utils/constant"
 class TaskRoute extends BaseRouter {
   constructor() {
     super();
@@ -14,20 +14,20 @@ class TaskRoute extends BaseRouter {
     this.router.post(
       "/Save",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       taskValidate,
       taskController.createAndUpdateTask
     );
     this.router.get(
       "/GetAll",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       taskController.getAllTask
     );
     this.router.delete(
       "/Delete",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       queryIdValidate,
       taskController.deleteTask
     );
@@ -35,14 +35,14 @@ class TaskRoute extends BaseRouter {
     this.router.delete(
       "/Archive",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       queryIdValidate,
       taskController.archiveTask
     );
     this.router.post(
       "/DeArchive",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       bodyIdValidate,
       taskController.deArchiveTask
     );

@@ -1,5 +1,4 @@
 import { IRole } from "../interfaces/DTO/IRole";
-import { IRolePermission } from "../interfaces/DTO/IRolePermission";
 import roleRepository from "../repositories/Role";
 import { ApiError } from "../utils/apiError";
 import httpStatus from "http-status";
@@ -41,7 +40,7 @@ class RoleService {
     };
   }
   async roleById(idQuery): Promise<object> {
-    const items: IRolePermission = await roleRepository.roleById(idQuery.Id);
+    const items: IRole = await roleRepository.roleById(idQuery.Id);
     const renameIdRole: IObj = items.toObject();
     renameIdRole.id = renameIdRole.id_role;
     delete renameIdRole.id_role;

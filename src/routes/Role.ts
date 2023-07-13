@@ -1,10 +1,10 @@
 import { BaseRouter } from "./BaseRouter";
-import { checkAdmin, checkLogin } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import roleController from "../controllers/Role";
 import { roleValidate } from "../validations/roleValidation";
 import { queryIdValidate } from "../validations/idValidation";
 import { updateWorkingTimeValidation } from "../validations/workingTimeValidation";
-
+import { ROLE } from "../utils/constant"
 class RoleRoute extends BaseRouter {
   constructor() {
     super();
@@ -15,33 +15,33 @@ class RoleRoute extends BaseRouter {
     this.router.post(
       "/Create",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       roleValidate,
       roleController.creatRole
     );
     this.router.get(
       "/GetAll",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       roleController.getAllPaggingRole
     );
     this.router.get(
       "/GetRoleForEdit",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       roleController.roleById
     );
     this.router.put(
       "/Update",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       updateWorkingTimeValidation,
       roleController.roleUpdate
     );
     this.router.delete(
       "/Delete",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       queryIdValidate,
       roleController.deleteRole
     );

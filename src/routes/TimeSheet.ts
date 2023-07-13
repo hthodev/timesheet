@@ -1,5 +1,5 @@
 import { BaseRouter } from "./BaseRouter";
-import { checkAdmin, checkLogin } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import timeSheetController from "../controllers/TimeSheet";
 
 class TimeSheetRoute extends BaseRouter {

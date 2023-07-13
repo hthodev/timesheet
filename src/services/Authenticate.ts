@@ -24,7 +24,7 @@ class AuthenticateService {
         ? "Password wrong"
         : "Account isn't registered";
       throw new ApiError(
-        httpStatus.INTERNAL_SERVER_ERROR,
+        httpStatus.UNAUTHORIZED,
         "Login fail!",
         true,
         message

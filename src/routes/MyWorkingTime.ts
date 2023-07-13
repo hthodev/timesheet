@@ -1,5 +1,5 @@
 import { BaseRouter } from "./BaseRouter";
-import { checkAdmin, checkLogin } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import myWorkingTimeController from "../controllers/MyWorkingTime";
 import { workingTimeValidation } from "../validations/workingTimeValidation";
 import { queryIdValidate } from "../validations/idValidation";

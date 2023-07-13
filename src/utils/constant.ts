@@ -31,3 +31,8 @@ export const PROJECTUSER_TYPE = {
   MEMBER: 0,
   PM: 1,
 };
+export const ROLE = {
+  ADMIN: "ADMIN",
+  MANAGER: "MANAGER",
+  BASIC_USER: "BASICUSER"
+}

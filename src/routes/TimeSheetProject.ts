@@ -1,7 +1,7 @@
 import { BaseRouter } from "./BaseRouter";
-import { checkAdmin, checkLogin, checkRole } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import timeSheetProjectController from "../controllers/TimeSheetProject";
-
+import { ROLE } from "../utils/constant";
 class TimeSheetProjectRoute extends BaseRouter {
   constructor() {
     super();
@@ -12,14 +12,14 @@ class TimeSheetProjectRoute extends BaseRouter {
     this.router.get(
       "/GetTimeSheetStatisticTasks",
       checkLogin,
-      checkRole("MANAGER", "ADMIN"),
+      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       timeSheetProjectController.timeSheetProjectTask
     );
 
     this.router.get(
       "/GetTimeSheetStatisticTeams",
       checkLogin,
-      checkRole("MANAGER", "ADMIN"),
+      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       timeSheetProjectController.timeSheetProjectUser
     );
   }

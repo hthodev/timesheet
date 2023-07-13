@@ -31,20 +31,19 @@ export class Application {
 
   start() {
     DBConnection();
-    this.server.app.use(errorConverter);
-    this.server.app.use(errorHandler);
-    this.server.app.use(
-      cookieSession({
-        name: "session",
-        keys: ["cyberwolve"],
-        maxAge: 24 * 60 * 60 * 100,
-      })
-    );
-
-    // this.server.app.use(passport.initialize());
-    // this.server.app.use(passport.session());
     this.server.app.use("/api", this.server.router);
     this.server.app.get("/avatars/:name", UserController.imageUser);
+    this.server.app.use(errorConverter);
+    this.server.app.use(errorHandler);
+    // this.server.app.use(
+    //   cookieSession({
+    //     name: "session",
+    //     keys: ["cyberwolve"],
+    //     maxAge: 24 * 60 * 60 * 100,
+    //   })
+    // );
+    // this.server.app.use(passport.initialize());
+    // this.server.app.use(passport.session());
     ((port = process.env.APP_PORT || 5000) => {
       this.server.app.listen(port, () =>
         console.log(`> Listening on port ${port}`)

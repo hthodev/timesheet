@@ -9,48 +9,21 @@ interface checkToken {
   roleNames: [string];
   exp: number;
 }
-export const checkAdmin = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
-  const decodeToken: checkToken | null =
-    req.headers && req.headers.authorization
-      ? jwtDecode(req.headers.authorization)
-      : null;
-
-  if (
-    decodeToken &&
-    decodeToken.roleNames &&
-    decodeToken.roleNames.some((role) => role.includes("ADMIN"))
-  ) {
-    next();
-  } else {
-    throw new ApiError(
-      httpStatus.FORBIDDEN,
-      "You can't access this page without permission"
-    );
-  }
-};
 
 export const checkRole = (...roles: string[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const decodeToken: checkToken | null =
-      req.headers && req.headers.authorization
-        ? jwtDecode(req.headers.authorization)
+    const decodeToken: checkToken | null = req?.headers?.authorization
+        ? jwtDecode(req?.headers?.authorization)
         : null;
 
-    if (
-      decodeToken &&
-      decodeToken.roleNames &&
-      decodeToken.roleNames.some((role) => roles.includes(role))
-    ) {
+    if (decodeToken?.roleNames?.some((role) => roles.includes(role))) {
       next();
     } else {
       throw new ApiError(
         httpStatus.FORBIDDEN,
         "You can't access this page without permission"
       );
+      // res.redirect("http://localhost:5500")
     }
   };
 };
@@ -60,14 +33,14 @@ export const checkLogin = (
   res: Response,
   next: NextFunction
 ): void => {
-  if (req.headers && !req.headers.authorization) {
+  if (!req?.headers?.authorization) {
     throw new ApiError(
       httpStatus.UNAUTHORIZED,
       "Current user did not login to the application!"
     );
   } else {
     jwt.verify(
-      req.headers.authorization.split(" ")[1],
+      req?.headers?.authorization.split(" ")[1],
       process.env.JWT_SECRET,
       (err, decode) => {
         let isExpiredToken: boolean = false;
@@ -83,7 +56,7 @@ export const checkLogin = (
         if (isExpiredToken === true) {
           throw new ApiError(
             httpStatus.UNAUTHORIZED,
-            "Your sesion was expired!"
+            "Your session was expired!"
           );
         } else {
           next();

@@ -1,5 +1,5 @@
 import { BaseRouter } from "./BaseRouter";
-import { checkAdmin, checkLogin } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import manageWorkingTimeController from "../controllers/ManageWorkingTime";
 
 class ManageWorkingRoute extends BaseRouter {

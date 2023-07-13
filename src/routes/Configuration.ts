@@ -1,6 +1,6 @@
 import { BaseRouter } from "./BaseRouter";
 import TaskController from "../controllers/Task";
-import { checkAdmin, checkLogin } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import configurationController from "../controllers/Configuration";
 
 class ConfigurationRoute extends BaseRouter {

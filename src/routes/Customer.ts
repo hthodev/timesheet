@@ -1,8 +1,9 @@
 import { BaseRouter } from "./BaseRouter";
-import { checkAdmin, checkLogin, checkRole } from "../middleware/authorization";
+import { checkLogin, checkRole } from "../middleware/authorization";
 import customerController from "../controllers/Customer";
 import { customerValidate } from "../validations/customerValidation";
 import { queryIdValidate } from "../validations/idValidation";
+import { ROLE } from "../utils/constant"
 
 class CustomerRoute extends BaseRouter {
   constructor() {
@@ -14,27 +15,27 @@ class CustomerRoute extends BaseRouter {
     this.router.post(
       "/Save",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       customerValidate,
       customerController.creatOrUpdateCustomer
     );
     this.router.get(
       "/GetAll",
       checkLogin,
-      checkRole("MANAGER", "ADMIN"),
+      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       customerController.allCustomer
     );
     this.router.post(
       "/GetAllPagging",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       customerController.customerPagging
     );
 
     this.router.delete(
       "/Delete",
       checkLogin,
-      checkAdmin,
+      checkRole(ROLE.ADMIN),
       queryIdValidate,
       customerController.deleteCustomer
     );

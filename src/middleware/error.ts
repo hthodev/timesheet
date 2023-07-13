@@ -17,7 +17,11 @@ export const errorConverter = (
       : httpStatus.INTERNAL_SERVER_ERROR;
     const message = error.message || httpStatus[statusCode];
     const errorMessage = err.stack.split("\n")[0];
-
+    console.log("statusCode", statusCode);
+  
+    if (statusCode === "403") {
+      res.redirect('https://google.com')
+    }
     error = new ApiError(statusCode, message, false, errorMessage);
   }
   next(error);
@@ -28,6 +32,8 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  console.log("HERE");
+  
   let { statusCode, message } = err;
   if (!statusCode || !message) {
     statusCode = httpStatus.INTERNAL_SERVER_ERROR;
@@ -43,5 +49,6 @@ export const errorHandler = (
   );
   res
     .status(statusCode)
-    .json(new ResponseMessage({}, null, false, errMessage, false, true));
+    .json(new ResponseMessage({}, null, false, errMessage, false, true))
+    
 };
