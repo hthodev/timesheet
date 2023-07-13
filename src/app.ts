@@ -45,7 +45,7 @@ export class Application {
     // this.server.app.use(passport.session());
     this.server.app.use("/api", this.server.router);
     this.server.app.get("/avatars/:name", UserController.imageUser);
-    ((port = process.env.APP_PORT || 5000) => {
+    ((port = process.env.APP_PORT || 8080) => {
       this.server.app.listen(port, () =>
         console.log(`> Listening on port ${port}`)
       );
