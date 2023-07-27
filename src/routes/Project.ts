@@ -25,13 +25,11 @@ class ProjectRoute extends BaseRouter {
     this.router.get(
       "/getAll",
       checkLogin,
-      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       projectController.getAllProject
     );
     this.router.get(
       "/Get",
       checkLogin,
-      checkRole(ROLE.ADMIN, ROLE.MANAGER),
       inputValidate,
       projectController.projectById
     );
