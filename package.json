@@ -2,7 +2,10 @@
   "name": "node_project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "test": "mocha --require ts-node/register src/tests/**/*.ts",
     "change": "tsc && node dist/index.js",
