@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "scripts": {
     "test": "mocha --require ts-node/register src/tests/**/*.ts",
