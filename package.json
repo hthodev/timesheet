@@ -8,11 +8,8 @@
   },
   "scripts": {
     "test": "mocha --require ts-node/register src/tests/**/*.ts",
-    "change": "tsc && node dist/index.js",
-    "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts",
-    "vercel-build": "echo hello",
-    "build": "tsc"
+    "start": "tsc && node dist/index.js",
+    "dev": "nodemon src/index.ts"
   },
   "keywords": [],
   "author": "",
